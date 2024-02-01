@@ -13,13 +13,13 @@ export type InputTypes = {
   status?: string;
 };
 
-interface TrackerDetails {
+type TrackerDetails = {
   input?: InputTypes;
   setInput: (input: InputTypes) => void;
   tasks: InputTypes[];
   currentLoginUser?: User;
   setCurrentLoginUser: (id: User) => void;
-}
+};
 
 export const useTrackerStore = create<TrackerDetails>()(
   persist(

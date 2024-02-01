@@ -1,10 +1,10 @@
 import Button from "react-bootstrap/Button";
 
-interface Props {
+type Props = {
   onClick: () => void;
   text: string;
   variant: string;
-}
+};
 
 const ButtonCTA = (props: Props) => {
   const { onClick, text, variant } = props;

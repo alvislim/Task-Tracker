@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-interface Props {
+type Props = {
   title: string;
   toShow: boolean;
   bodyContent: JSX.Element | string;
@@ -9,7 +9,7 @@ interface Props {
   onSave: () => void;
   closeButtonText?: string;
   saveButtonText?: string;
-}
+};
 
 const ModalPrompt = (props: Props) => {
   const {

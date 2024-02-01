@@ -29,9 +29,9 @@ export const currentLoginUser: User = {
   id: 123,
 };
 
-interface TaskLists {
+type TaskLists = {
   tasks: InputTypes[];
-}
+};
 
 export const taskLists: TaskLists = {
   tasks: [],

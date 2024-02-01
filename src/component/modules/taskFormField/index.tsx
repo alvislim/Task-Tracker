@@ -1,43 +1,31 @@
 import Form from "react-bootstrap/Form";
 import { ChangeEvent } from "react";
 import { status } from "../../../services/constants";
+import TextField from "../../common/textField";
+import TextArea from "../../common/textArea";
+import DatePicker from "../../common/datePicker";
+import Select from "../../common/select";
 
-interface Props {
+type Props = {
   onChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => void;
-}
+};
 
 const TaskFormField = (props: Props) => {
   const { onChange } = props;
   return (
     <>
       <Form>
-        <Form.Group controlId="region">
-          <Form.Label>Region</Form.Label>
-          <Form.Control type="text" onChange={(e) => onChange(e)} />
-        </Form.Group>
-        <Form.Group controlId="description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} onChange={(e) => onChange(e)} />
-        </Form.Group>
-        <Form.Group controlId="dueDate">
-          <Form.Label>Due Date</Form.Label>
-          <Form.Control type="date" onChange={(e) => onChange(e)} />
-        </Form.Group>
-        <Form.Select
-          aria-label="Status"
+        <TextField onChange={onChange} label="Region" id="region" />
+        <TextArea onChange={onChange} label="Description" id="description" />
+        <DatePicker onChange={onChange} label="Due Date" id="dueDate" />
+        <Select
+          onChange={onChange}
+          options={status}
           id="status"
-          onChange={(e) => onChange(e)}
-        >
-          {status.map((elem, index) => {
-            return (
-              <option key={`${index}_${elem}`} value={elem}>
-                {elem}
-              </option>
-            );
-          })}
-        </Form.Select>
+          label="Status"
+        />
       </Form>
     </>
   );
