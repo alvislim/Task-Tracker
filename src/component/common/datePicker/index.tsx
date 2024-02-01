@@ -1,6 +1,5 @@
 import Form from "react-bootstrap/Form";
 import { ChangeEvent } from "react";
-import { status } from "../../../services/constants";
 
 type Props = {
   onChange: (

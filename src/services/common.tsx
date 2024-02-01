@@ -7,3 +7,7 @@ export const getCurrentDate = () => {
 
   return currentDate;
 };
+
+export const generateTaskNumber = () => {
+  return crypto.randomUUID();
+};

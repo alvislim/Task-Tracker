@@ -31,7 +31,7 @@ export const useTrackerStore = create<TrackerDetails>()(
       setCurrentLoginUser: (id) => set({ currentLoginUser: id }),
     }),
     {
-      name: "tracker-input",
+      name: "tracker-data",
     }
   )
 );

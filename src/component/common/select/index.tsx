@@ -15,7 +15,12 @@ const Select = (props: Props) => {
   return (
     <>
       <Form.Label>{label}</Form.Label>
-      <Form.Select aria-label="Status" id={id} onChange={(e) => onChange(e)}>
+      <Form.Select
+        aria-label="Status"
+        id={id}
+        onChange={(e) => onChange(e)}
+        defaultValue={options[0]}
+      >
         {options.map((elem, index) => {
           return (
             <option key={`${index}_${elem}`} value={elem}>
