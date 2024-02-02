@@ -38,6 +38,7 @@ export const useUserData = () => {
         let taskLists = [...tasks];
         taskLists[inputIndex] = input;
         setTasks(taskLists);
+        setInput(undefined);
       }
     }
   };

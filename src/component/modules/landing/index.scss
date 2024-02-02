@@ -4,5 +4,17 @@
   .tasks-wrapper {
     display: flex;
     flex-flow: row;
+
+    .task-detail-card-wrapper {
+      .cards-container {
+        .card-body {
+          .card-wrapper {
+            .desc-wrapper {
+              max-width: 150px;
+            }
+          }
+        }
+      }
+    }
   }
 }

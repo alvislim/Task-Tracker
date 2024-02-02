@@ -3,10 +3,11 @@ import { useUserData } from "../../../hooks/useUserData";
 import { Route } from "../../../routes/edit.$id.lazy";
 import { InputTypes, useTrackerStore } from "../../../store/trackerStore";
 import TaskFormField from "../landing/taskFormField";
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import { status } from "../../../services/constants";
 import { userData } from "../../../dummydata";
 import "./index.scss";
+import StepsIndicator from "../../common/stepper";
 
 const Edit = () => {
   const { id } = Route.useParams();
@@ -28,8 +29,29 @@ const Edit = () => {
     onEdit(inputValues, id);
   };
 
+  const style = {
+    activeBgColor: "green",
+    activeTextColor: "white",
+    completedBgColor: "green",
+    completedTextColor: "white",
+    inactiveBgColor: "grey",
+    inactiveTextColor: "white",
+    size: "2em",
+    circleFontSize: "1rem",
+    labelFontSize: "0.875rem",
+    borderRadius: "50%",
+    fontWeight: "500",
+  };
+
+  const activeStep = status.indexOf(task?.status || "");
+
   return (
     <div className="edit-wrapper">
+      <StepsIndicator
+        activeStep={activeStep}
+        styleConfig={style}
+        options={status}
+      />
       <TaskFormField
         onChange={onChange}
         users={userData}
@@ -38,10 +60,14 @@ const Edit = () => {
       />
       <div className="button-wrapper">
         <Link to="/">
-          <Button className="back-cta">Back</Button>
+          <Button className="back-cta" variant="secondary">
+            Back
+          </Button>
         </Link>
         <Link to="/" onClick={editEvent}>
-          <Button className="save-cta">Save</Button>
+          <Button className="save-cta" variant="success">
+            Save
+          </Button>
         </Link>
       </div>
     </div>

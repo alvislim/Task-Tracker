@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { InputTypes } from "../../../../../store/trackerStore";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Button from "react-bootstrap/Button";
 
 type Props = {
   task: InputTypes;
@@ -42,7 +43,7 @@ const TaskDetailCard = (props: Props) => {
             params={{ id: task.taskNumber }}
             preload="intent"
           >
-            Edit
+            <Button variant="success">Edit</Button>
           </Link>
         ) : null}
       </Card.Body>

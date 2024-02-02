@@ -34,7 +34,7 @@ const ModalPrompt = (props: Props) => {
           </Button>
         ) : null}
         {saveButtonText ? (
-          <Button variant="primary" onClick={onSave}>
+          <Button variant="success" onClick={onSave}>
             {saveButtonText}
           </Button>
         ) : null}

@@ -26,7 +26,7 @@ const Landing = () => {
 
   return (
     <div className="wrapper">
-      <ButtonCTA text="Create Ticket" variant="primary" onClick={popUpCTA} />
+      <ButtonCTA text="Create Ticket" variant="success" onClick={popUpCTA} />
       <ModalPrompt
         title="Ticket Creation"
         toShow={showPopUp}
