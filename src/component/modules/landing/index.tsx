@@ -5,15 +5,19 @@ import { generateTaskNumber, getCurrentDate } from "../../../services/common";
 import ModalPrompt from "../../../component/common/modalPrompt";
 import TaskFormField from "./taskFormField";
 import "./index.scss";
-import TaskDetailCard from "./taskDetailCard/indexs";
+import TaskDetailCardWrapper from "./taskDetailCardWrapper/indexs";
+import { status } from "../../../services/constants";
 
 const Landing = () => {
-  const { input, setInput, currentLoginUser, tasks } = useTrackerStore();
+  const { input, setInput, currentLoginUser, tasks, userList } =
+    useTrackerStore();
 
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const popUpCTA = () => {
     setShowPopUp(!showPopUp);
   };
+
+  const users = userList ? userList : [];
 
   const onChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -21,8 +25,6 @@ const Landing = () => {
     const target = e.target as HTMLInputElement;
     const id = target.id as string;
     const value = target.value as string;
-    console.log(id);
-    console.log(value);
     id &&
       setInput({
         ...input,
@@ -40,7 +42,7 @@ const Landing = () => {
       owner: currentLoginUser?.name,
       taskNumber: generateTaskNumber(),
     };
-    input && tasks.push(updateTaskWithId);
+    input && tasks?.push(updateTaskWithId);
   };
 
   return (
@@ -53,14 +55,16 @@ const Landing = () => {
         onSave={onConfirm}
         closeButtonText="Close"
         saveButtonText="Save Changes"
-        bodyContent={<TaskFormField onChange={onChange} />}
+        bodyContent={
+          <TaskFormField onChange={onChange} status={status} users={users} />
+        }
       />
       <div className="tasks-wrapper">
-        <TaskDetailCard category="To Do" tasks={tasks} />
-        <TaskDetailCard category="In Progress" tasks={tasks} />
-        <TaskDetailCard category="In Review" tasks={tasks} />
-        <TaskDetailCard category="Done" tasks={tasks} />
-        <TaskDetailCard category="Cancelled" tasks={tasks} />
+        <TaskDetailCardWrapper category="To Do" tasks={tasks} />
+        <TaskDetailCardWrapper category="In Progress" tasks={tasks} />
+        <TaskDetailCardWrapper category="In Review" tasks={tasks} />
+        <TaskDetailCardWrapper category="Done" tasks={tasks} />
+        <TaskDetailCardWrapper category="Cancelled" tasks={tasks} />
       </div>
     </div>
   );

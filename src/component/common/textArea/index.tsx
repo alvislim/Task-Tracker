@@ -8,10 +8,11 @@ type Props = {
   id: string;
   label: string;
   rows?: number;
+  value?: string;
 };
 
 const TextArea = (props: Props) => {
-  const { onChange, id, label, rows } = props;
+  const { onChange, id, label, rows, value } = props;
   const numberOfRows = rows ? rows : 3;
   return (
     <>
@@ -21,6 +22,7 @@ const TextArea = (props: Props) => {
           as="textarea"
           rows={numberOfRows}
           onChange={(e) => onChange(e)}
+          value={value}
         />
       </Form.Group>
     </>

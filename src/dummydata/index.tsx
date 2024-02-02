@@ -29,10 +29,4 @@ export const currentLoginUser: User = {
   id: 123,
 };
 
-type TaskLists = {
-  tasks: InputTypes[];
-};
-
-export const taskLists: TaskLists = {
-  tasks: [],
-};
+export const taskLists: InputTypes[] = [];

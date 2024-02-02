@@ -7,15 +7,16 @@ type Props = {
   ) => void;
   id: string;
   label: string;
+  value?: string;
 };
 
 const DatePicker = (props: Props) => {
-  const { onChange, id, label } = props;
+  const { onChange, id, label, value } = props;
   return (
     <>
       <Form.Group controlId={id}>
         <Form.Label>{label}</Form.Label>
-        <Form.Control type="date" onChange={(e) => onChange(e)} />
+        <Form.Control type="date" onChange={(e) => onChange(e)} value={value} />
       </Form.Group>
     </>
   );

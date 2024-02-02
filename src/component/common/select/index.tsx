@@ -8,10 +8,11 @@ type Props = {
   options: string[];
   id: string;
   label: string;
+  value?: string;
 };
 
 const Select = (props: Props) => {
-  const { onChange, id, options, label } = props;
+  const { onChange, id, options, label, value } = props;
   return (
     <>
       <Form.Label>{label}</Form.Label>
@@ -20,6 +21,7 @@ const Select = (props: Props) => {
         id={id}
         onChange={(e) => onChange(e)}
         defaultValue={options[0]}
+        value={value}
       >
         {options.map((elem, index) => {
           return (
