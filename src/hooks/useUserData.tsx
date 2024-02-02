@@ -1,12 +1,23 @@
+import { ChangeEvent } from "react";
 import { useTrackerStore } from "../store/trackerStore";
 
 export const useUserData = () => {
-  const { tasks: taskLists, currentLoginUser } = useTrackerStore();
-  const tasks = taskLists?.filter(
-    (elem) => elem.userId === currentLoginUser?.id
-  );
+  const { setInput, input } = useTrackerStore();
+
+  const onChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const target = e.target as HTMLInputElement;
+    const id = target.id as string;
+    const value = target.value as string;
+    id &&
+      setInput({
+        ...input,
+        [id]: value,
+      });
+  };
 
   return {
-    tasks,
+    onChange,
   };
 };

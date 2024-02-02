@@ -16,7 +16,12 @@ const DatePicker = (props: Props) => {
     <>
       <Form.Group controlId={id}>
         <Form.Label>{label}</Form.Label>
-        <Form.Control type="date" onChange={(e) => onChange(e)} value={value} />
+        <Form.Control
+          type="date"
+          onChange={(e) => onChange(e)}
+          value={value}
+          min={new Date().toISOString().split("T")[0]}
+        />
       </Form.Group>
     </>
   );

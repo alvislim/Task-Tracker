@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useTrackerStore } from "../../../store/trackerStore";
 import ButtonCTA from "../../../component/common/buttonCta";
 import { generateTaskNumber, getCurrentDate } from "../../../services/common";
@@ -7,10 +7,12 @@ import TaskFormField from "./taskFormField";
 import "./index.scss";
 import TaskDetailCardWrapper from "./taskDetailCardWrapper/indexs";
 import { status } from "../../../services/constants";
+import { useUserData } from "../../../hooks/useUserData";
 
 const Landing = () => {
-  const { input, setInput, currentLoginUser, tasks, userList } =
-    useTrackerStore();
+  const { input, currentLoginUser, tasks, userList } = useTrackerStore();
+
+  const { onChange } = useUserData();
 
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const popUpCTA = () => {
@@ -18,19 +20,6 @@ const Landing = () => {
   };
 
   const users = userList ? userList : [];
-
-  const onChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const target = e.target as HTMLInputElement;
-    const id = target.id as string;
-    const value = target.value as string;
-    id &&
-      setInput({
-        ...input,
-        [id]: value,
-      });
-  };
 
   const onConfirm = () => {
     setShowPopUp(!showPopUp);

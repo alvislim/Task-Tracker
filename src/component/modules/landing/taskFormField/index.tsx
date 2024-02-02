@@ -5,6 +5,7 @@ import TextArea from "../../../common/textArea";
 import DatePicker from "../../../common/datePicker";
 import Select from "../../../common/select";
 import { User } from "../../../../dummydata";
+import { InputTypes } from "../../../../store/trackerStore";
 
 type Props = {
   onChange: (
@@ -12,28 +13,46 @@ type Props = {
   ) => void;
   status: string[];
   users: User[];
+  values?: InputTypes;
 };
 
 const TaskFormField = (props: Props) => {
-  const { onChange, status, users } = props;
+  const { onChange, status, users, values } = props;
   const usersList = users && users.map((elem) => elem.name);
   return (
     <>
       <Form>
-        <TextField onChange={onChange} label="Region" id="region" />
-        <TextArea onChange={onChange} label="Description" id="description" />
-        <DatePicker onChange={onChange} label="Due Date" id="dueDate" />
+        <TextField
+          onChange={onChange}
+          label="Region"
+          id="region"
+          value={values?.region}
+        />
+        <TextArea
+          onChange={onChange}
+          label="Description"
+          id="description"
+          value={values?.region}
+        />
+        <DatePicker
+          onChange={onChange}
+          label="Due Date"
+          id="dueDate"
+          value={values?.dueDate}
+        />
         <Select
           onChange={onChange}
           options={status}
           id="status"
           label="Status"
+          value={values?.status}
         />
         <Select
           onChange={onChange}
           options={usersList}
           id="owner"
           label="Assignee"
+          value={values?.owner}
         />
       </Form>
     </>
