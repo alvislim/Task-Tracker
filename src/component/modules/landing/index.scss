@@ -1,6 +1,6 @@
 .wrapper {
   padding: 2rem;
-
+  overflow-x: scroll;
   .tasks-wrapper {
     display: flex;
     flex-flow: row;

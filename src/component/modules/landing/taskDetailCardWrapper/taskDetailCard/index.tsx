@@ -30,11 +30,8 @@ const TaskDetailCard = (props: Props) => {
               {ListGroupItem("Region", task.region)}
               {ListGroupItem("Owner", task.owner)}
               {ListGroupItem("Deadline", task.dueDate)}
+              {ListGroupItem("Description", task.description)}
             </ListGroup>
-          </div>
-          <div className="desc-wrapper">
-            <Card.Subtitle>Description</Card.Subtitle>
-            <Card.Text>{task.description}</Card.Text>
           </div>
         </div>
         {task.taskNumber ? (

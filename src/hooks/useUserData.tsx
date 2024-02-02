@@ -26,6 +26,7 @@ export const useUserData = () => {
       dateCreation: currentDate,
       taskNumber: input?.taskNumber ?? generateTaskNumber(),
     };
+    !updateTaskWithId.status ?? "To Do";
     const currTasks = tasks || [];
     currTasks?.push(updateTaskWithId);
     setTasks(currTasks);
