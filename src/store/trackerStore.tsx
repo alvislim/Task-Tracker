@@ -17,8 +17,8 @@ type TrackerDetails = {
   input?: InputTypes;
   setInput: (input: InputTypes) => void;
   tasks?: InputTypes[];
-  currentLoginUser?: User;
-  setCurrentLoginUser: (id: User) => void;
+  currentUser?: User;
+  setCurrentUser: (id: User) => void;
   userList?: User[];
   setUserList: (list: User[]) => void;
   setTasks: (data: InputTypes[]) => void;
@@ -29,15 +29,15 @@ export const useTrackerStore = create<TrackerDetails>()(
     (set) => ({
       input: undefined,
       tasks: undefined,
-      currentLoginUser: undefined,
+      currentUser: undefined,
       setInput: (obj) => set({ input: obj }),
-      setCurrentLoginUser: (id) => set({ currentLoginUser: id }),
+      setCurrentUser: (id) => set({ currentUser: id }),
       userList: undefined,
       setUserList: (list) => set({ userList: list }),
       setTasks: (data) => set({ tasks: data }),
     }),
     {
-      name: "tracker-data",
+      name: "tracker-data-obj",
     }
   )
 );

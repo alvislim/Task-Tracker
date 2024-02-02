@@ -20,9 +20,11 @@ const Select = (props: Props) => {
         aria-label="Status"
         id={id}
         onChange={(e) => onChange(e)}
-        defaultValue={options[0]}
         value={value}
       >
+        <option key="blankChoice" hidden>
+          --Please select a value--
+        </option>
         {options.map((elem, index) => {
           return (
             <option key={`${index}_${elem}`} value={elem}>

@@ -8,9 +8,10 @@ import "./index.scss";
 import TaskDetailCardWrapper from "./taskDetailCardWrapper/indexs";
 import { status } from "../../../services/constants";
 import { useUserData } from "../../../hooks/useUserData";
+import { userData } from "../../../dummydata";
 
 const Landing = () => {
-  const { input, currentLoginUser, tasks, userList } = useTrackerStore();
+  const { input, currentUser, tasks, setTasks } = useTrackerStore();
 
   const { onChange } = useUserData();
 
@@ -19,19 +20,19 @@ const Landing = () => {
     setShowPopUp(!showPopUp);
   };
 
-  const users = userList ? userList : [];
-
   const onConfirm = () => {
     setShowPopUp(!showPopUp);
     const currentDate = getCurrentDate();
     const updateTaskWithId = {
       ...input,
-      userId: currentLoginUser?.id,
+      userId: currentUser?.id,
       dateCreation: currentDate,
-      owner: currentLoginUser?.name,
+      owner: currentUser?.name,
       taskNumber: generateTaskNumber(),
     };
-    input && tasks?.push(updateTaskWithId);
+    const currTasks = tasks || [];
+    currTasks?.push(updateTaskWithId);
+    setTasks(currTasks);
   };
 
   return (
@@ -45,7 +46,7 @@ const Landing = () => {
         closeButtonText="Close"
         saveButtonText="Save Changes"
         bodyContent={
-          <TaskFormField onChange={onChange} status={status} users={users} />
+          <TaskFormField onChange={onChange} status={status} users={userData} />
         }
       />
       <div className="tasks-wrapper">
