@@ -32,7 +32,7 @@ const TaskFormField = (props: Props) => {
           onChange={onChange}
           label="Description"
           id="description"
-          value={values?.region}
+          value={values?.description}
         />
         <DatePicker
           onChange={onChange}

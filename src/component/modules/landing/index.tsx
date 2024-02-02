@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useTrackerStore } from "../../../store/trackerStore";
 import ButtonCTA from "../../../component/common/buttonCta";
-import { generateTaskNumber, getCurrentDate } from "../../../services/common";
 import ModalPrompt from "../../../component/common/modalPrompt";
 import TaskFormField from "./taskFormField";
 import "./index.scss";
@@ -11,28 +10,18 @@ import { useUserData } from "../../../hooks/useUserData";
 import { userData } from "../../../dummydata";
 
 const Landing = () => {
-  const { input, currentUser, tasks, setTasks } = useTrackerStore();
+  const { tasks } = useTrackerStore();
 
-  const { onChange } = useUserData();
+  const { onChange, onConfirm } = useUserData();
 
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
   const popUpCTA = () => {
     setShowPopUp(!showPopUp);
   };
 
-  const onConfirm = () => {
+  const confirmEvent = () => {
     setShowPopUp(!showPopUp);
-    const currentDate = getCurrentDate();
-    const updateTaskWithId = {
-      ...input,
-      userId: currentUser?.id,
-      dateCreation: currentDate,
-      owner: currentUser?.name,
-      taskNumber: generateTaskNumber(),
-    };
-    const currTasks = tasks || [];
-    currTasks?.push(updateTaskWithId);
-    setTasks(currTasks);
+    onConfirm();
   };
 
   return (
@@ -42,7 +31,7 @@ const Landing = () => {
         title="Ticket Creation"
         toShow={showPopUp}
         onClose={popUpCTA}
-        onSave={onConfirm}
+        onSave={confirmEvent}
         closeButtonText="Close"
         saveButtonText="Save Changes"
         bodyContent={

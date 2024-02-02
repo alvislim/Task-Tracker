@@ -15,9 +15,14 @@ const TaskDetailCardWrapper = (props: Props) => {
       <h3>{category}</h3>
       <div className="cards-container">
         {tasks
-          ? tasks.map((elem) => {
+          ? tasks.map((elem, index) => {
               if (elem.status === category) {
-                return <TaskDetailCard task={elem} key={elem.taskNumber} />;
+                return (
+                  <TaskDetailCard
+                    task={elem}
+                    key={`${elem.taskNumber}_${index}`}
+                  />
+                );
               }
             })
           : null}
