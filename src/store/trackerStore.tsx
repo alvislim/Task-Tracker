@@ -15,7 +15,7 @@ export type InputTypes = {
 
 type TrackerDetails = {
   input?: InputTypes;
-  setInput: (input: InputTypes) => void;
+  setInput: (input: InputTypes | undefined) => void;
   tasks?: InputTypes[];
   currentUser?: User;
   setCurrentUser: (id: User) => void;
@@ -37,7 +37,7 @@ export const useTrackerStore = create<TrackerDetails>()(
       setTasks: (data) => set({ tasks: data }),
     }),
     {
-      name: "tracker-data-obj",
+      name: "tracker-store-data",
     }
   )
 );

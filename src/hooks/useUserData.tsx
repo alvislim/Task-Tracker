@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { useTrackerStore } from "../store/trackerStore";
+import { InputTypes, useTrackerStore } from "../store/trackerStore";
 import { generateTaskNumber, getCurrentDate } from "../services/common";
 
 export const useUserData = () => {
@@ -11,7 +11,6 @@ export const useUserData = () => {
     const target = e.target as HTMLInputElement;
     const id = target.id as string;
     const value = target.value as string;
-    console.log(`${id}__${value}`);
     id &&
       setInput({
         ...input,
@@ -25,7 +24,6 @@ export const useUserData = () => {
       ...input,
       userId: currentUser?.id,
       dateCreation: currentDate,
-      owner: input?.owner,
       taskNumber: input?.taskNumber ?? generateTaskNumber(),
     };
     const currTasks = tasks || [];
@@ -33,8 +31,21 @@ export const useUserData = () => {
     setTasks(currTasks);
   };
 
+  const onEdit = (input: InputTypes, id: string) => {
+    if (tasks) {
+      console.log("hey");
+      const inputIndex = tasks.findIndex((obj) => obj.taskNumber === id);
+      if (inputIndex >= 0 && input) {
+        let taskLists = [...tasks];
+        taskLists[inputIndex] = input;
+        setTasks(taskLists);
+      }
+    }
+  };
+
   return {
     onChange,
     onConfirm,
+    onEdit,
   };
 };
