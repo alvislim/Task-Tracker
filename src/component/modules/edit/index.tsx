@@ -51,6 +51,7 @@ const Edit = () => {
         activeStep={activeStep}
         styleConfig={style}
         options={status}
+        label="Progress"
       />
       <TaskFormField
         onChange={onChange}

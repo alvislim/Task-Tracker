@@ -18,16 +18,20 @@ type Props = {
   activeStep: number;
   options: string[];
   styleConfig?: StyleConfig;
+  label?: string;
 };
 
 const StepsIndicator = (props: Props) => {
-  const { activeStep, options, styleConfig } = props;
+  const { activeStep, options, styleConfig, label } = props;
   return (
-    <Stepper activeStep={activeStep} styleConfig={styleConfig}>
-      {options.map((elem) => {
-        return <Step label={elem} />;
-      })}
-    </Stepper>
+    <>
+      <p className="steps-label">{label}</p>
+      <Stepper activeStep={activeStep} styleConfig={styleConfig}>
+        {options.map((elem) => {
+          return <Step label={elem} />;
+        })}
+      </Stepper>
+    </>
   );
 };
 

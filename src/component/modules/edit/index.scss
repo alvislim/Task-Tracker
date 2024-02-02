@@ -1,6 +1,11 @@
 .edit-wrapper {
   margin: 2rem;
 
+  .steps-label {
+    text-align: center;
+    font-weight: 500;
+  }
+
   .button-wrapper {
     display: flex;
     gap: 1rem;
