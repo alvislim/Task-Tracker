@@ -33,7 +33,6 @@ export const useUserData = () => {
 
   const onEdit = (input: InputTypes, id: string) => {
     if (tasks) {
-      console.log("hey");
       const inputIndex = tasks.findIndex((obj) => obj.taskNumber === id);
       if (inputIndex >= 0 && input) {
         let taskLists = [...tasks];
