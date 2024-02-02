@@ -7,5 +7,6 @@ export default defineConfig({
   plugins: [    
     TanStackRouterVite(),
     react()],
+    base: "https://alvislim.github.io/"
 })
 
