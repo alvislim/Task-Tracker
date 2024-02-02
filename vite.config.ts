@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [    
     TanStackRouterVite(),
     react()],
-    base: "/task-tracker/"
-})
+    base: '/vite-deploy-demo/'
+  })
 
