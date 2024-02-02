@@ -19,6 +19,7 @@ type Props = {
   options: string[];
   styleConfig?: StyleConfig;
   label?: string;
+  overlayText?: string;
 };
 
 const StepsIndicator = (props: Props) => {
@@ -28,7 +29,7 @@ const StepsIndicator = (props: Props) => {
       <p className="steps-label">{label}</p>
       <Stepper activeStep={activeStep} styleConfig={styleConfig}>
         {options.map((elem) => {
-          return <Step label={elem} />;
+          return <Step label={elem} key={elem} />;
         })}
       </Stepper>
     </>

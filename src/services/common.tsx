@@ -11,3 +11,7 @@ export const getCurrentDate = () => {
 export const generateTaskNumber = () => {
   return crypto.randomUUID();
 };
+
+export const isEpicSection = (section?: string) => {
+  return section === "epic";
+};

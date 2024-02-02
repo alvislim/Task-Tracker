@@ -31,4 +31,4 @@ export const currentLoginUser: User = {
 
 export const taskLists: InputTypes[] = [];
 
-export const region: string[] = ["Singapore", "Hong Kong", "UAE"];
+export const epic: string[] = ["Singapore", "Hong Kong", "UAE"];

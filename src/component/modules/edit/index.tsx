@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useUserData } from "../../../hooks/useUserData";
+import { useFormEvent } from "../../../hooks/useFormEvent";
 import { Route } from "../../../routes/edit.$id.lazy";
 import { InputTypes, useTrackerStore } from "../../../store/trackerStore";
 import TaskFormField from "../landing/taskFormField";
@@ -8,25 +8,58 @@ import { status } from "../../../services/constants";
 import { userData } from "../../../dummydata";
 import "./index.scss";
 import StepsIndicator from "../../common/stepper";
+import { isEpicSection } from "../../../services/common";
+import { ChangeEvent } from "react";
 
 const Edit = () => {
   const { id } = Route.useParams();
-  const { tasks, input } = useTrackerStore();
-  const { onChange, onEdit } = useUserData();
-  const task = tasks?.filter((elem) => elem.taskNumber === id)[0];
+  const {
+    tasks,
+    taskInput,
+    section,
+    epicInput,
+    epics,
+    setEpicInput,
+    setTaskInput,
+  } = useTrackerStore();
+  const { onTaskInputChange, onTaskEdit, onEpicEdit, onEpicInputChange } =
+    useFormEvent();
+
+  const data = isEpicSection(section) ? epicInput : taskInput;
+  const storeValue = isEpicSection(section) ? epics : tasks;
+  const task = storeValue?.filter((elem) =>
+    isEpicSection(section) ? elem.epicNumber === id : elem.taskNumber === id
+  )[0];
+
+  const clearInput = () => {
+    isEpicSection(section) ? setEpicInput(undefined) : setTaskInput(undefined);
+  };
+
   const inputValues: InputTypes = {
-    region: input?.region ?? task?.region,
-    description: input?.description ?? task?.description,
-    dueDate: input?.dueDate ?? task?.dueDate,
-    status: input?.status ?? task?.status,
-    owner: input?.owner ?? task?.owner,
+    epic: data?.epic ? data?.epic : task?.epic,
+    description: data?.description ? data?.description : task?.description,
+    dueDate: data?.dueDate ? data?.dueDate : task?.dueDate,
+    status: data?.status ? data?.status : task?.status,
+    owner: data?.owner ? data?.owner : task?.owner,
     userId: task?.userId,
     taskNumber: task?.taskNumber,
     dateCreation: task?.dateCreation,
   };
 
   const editEvent = () => {
-    onEdit(inputValues, id);
+    if (isEpicSection(section)) {
+      onEpicEdit(inputValues, id);
+    } else {
+      onTaskEdit(inputValues, id);
+    }
+  };
+
+  const inputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    return isEpicSection(section)
+      ? onEpicInputChange(e, id)
+      : onTaskInputChange(e, id);
   };
 
   const style = {
@@ -45,6 +78,10 @@ const Edit = () => {
 
   const activeStep = status.indexOf(task?.status || "");
 
+  const epicList = epics
+    ? epics.map((elem) => (elem.epic ? elem.epic : ""))
+    : undefined;
+
   return (
     <div className="edit-wrapper">
       <StepsIndicator
@@ -54,14 +91,15 @@ const Edit = () => {
         label="Progress"
       />
       <TaskFormField
-        onChange={onChange}
+        onChange={(e) => inputChange(e)}
         users={userData}
         status={status}
         values={inputValues}
+        epic={epicList}
       />
       <div className="button-wrapper">
         <Link to="/">
-          <Button className="back-cta" variant="secondary">
+          <Button className="back-cta" variant="secondary" onClick={clearInput}>
             Back
           </Button>
         </Link>

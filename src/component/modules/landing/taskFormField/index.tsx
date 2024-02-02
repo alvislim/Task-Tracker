@@ -1,11 +1,11 @@
 import Form from "react-bootstrap/Form";
 import { ChangeEvent } from "react";
-import TextField from "../../../common/textField";
 import TextArea from "../../../common/textArea";
 import DatePicker from "../../../common/datePicker";
 import Select from "../../../common/select";
 import { User } from "../../../../dummydata";
 import { InputTypes } from "../../../../store/trackerStore";
+import TextField from "../../../common/textField";
 
 type Props = {
   onChange: (
@@ -14,20 +14,33 @@ type Props = {
   status: string[];
   users: User[];
   values?: InputTypes;
+  epic?: string[];
 };
 
 const TaskFormField = (props: Props) => {
-  const { onChange, status, users, values } = props;
+  const { onChange, status, users, values, epic } = props;
   const usersList = users && users.map((elem) => elem.name);
+
   return (
     <>
       <Form>
-        <TextField
-          onChange={onChange}
-          label="Region"
-          id="region"
-          value={values?.region}
-        />
+        {epic ? (
+          <Select
+            onChange={onChange}
+            options={epic}
+            id="epic"
+            label="Epic"
+            value={values?.epic}
+          />
+        ) : (
+          <TextField
+            onChange={onChange}
+            label="Epic"
+            id="epic"
+            value={values?.epic}
+          />
+        )}
+
         <TextArea
           onChange={onChange}
           label="Description"
