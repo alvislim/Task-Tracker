@@ -2,6 +2,7 @@
   "name": "tracker",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://alvislim.github.io/task-tracker/",
   "type": "module",
   "scripts": {
     "dev": "vite",
